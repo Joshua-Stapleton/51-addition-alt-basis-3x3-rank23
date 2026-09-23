@@ -2,9 +2,12 @@ import json
 import numpy as np
 
 
-def multiply3x3_cr51(a: np.ndarray, b: np.ndarray, P: np.ndarray, Q: np.ndarray, R: np.ndarray) -> np.ndarray:
-    x0, x1, x2, x3, x4, x5, x6, x7, x8 = P @ a.reshape(9)
-    y0, y1, y2, y3, y4, y5, y6, y7, y8 = Q @ b.reshape(9)
+def multiply3x3_cr51(a: np.ndarray, b: np.ndarray) -> np.ndarray:
+    a0, a1, a2, a3, a4, a5, a6, a7, a8 = a.reshape(9)
+    b0, b1, b2, b3, b4, b5, b6, b7, b8 = b.reshape(9)
+
+    x0, x1, x2, x3, x4, x5, x6, x7, x8 = a0, a1, a2, a3, a4, a5, a6, a7, a8 - a6
+    y0, y1, y2, y3, y4, y5, y6, y7, y8 = b0, b1, b2 + b0, b3, b4, b5, b6 - b7, b7, b8 + b5
 
     # 13 additions
     u0 = x0
@@ -101,8 +104,8 @@ def multiply3x3_cr51(a: np.ndarray, b: np.ndarray, P: np.ndarray, Q: np.ndarray,
     z7 = p9 - p10 + t4
     z8 = p16 - t2
 
-    z = np.array([z0, z1, z2, z3, z4, z5, z6, z7, z8])
-    return (R @ z).reshape(3, 3)
+    c = np.array([z0, z1, z2, z3, z4, z5, z6, z7, z8 + z2])
+    return c.reshape(3, 3)
 
 
 def main():
@@ -152,7 +155,7 @@ def main():
         # check the full scheme in the new basis
         assert np.allclose(c, (R @ z).reshape(3, 3))
         # check the reduced scheme in the new basis
-        assert np.allclose(c, multiply3x3_cr51(a, b, P, Q, R))
+        assert np.allclose(c, multiply3x3_cr51(a, b))
 
     print("All tests passed")
 
