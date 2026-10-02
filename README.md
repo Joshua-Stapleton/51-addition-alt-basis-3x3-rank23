@@ -1,5 +1,7 @@
 # A 51-Addition Alternative-Basis Kernel for Rank-23 3x3 Matrix Multiplication
 
+[![arXiv:2606.02480](https://img.shields.io/badge/arXiv-2609.32388-b31b1b.svg)](https://arxiv.org/abs/2609.32388)
+
 This repository provides a machine-checkable certificate for a rank-23 bilinear algorithm that multiplies two 3x3 matrices over the reals using
 51 kernel additions and 5 additional additions for the change of basis, for a total of 56 additions.
 
@@ -46,8 +48,8 @@ If you use this certificate or the accompanying algorithm in your work, please c
 @article{stapleton2026a,
     title={A 51-Addition Alternative-Basis Kernel for Rank-23 3x3 Matrix Multiplication},
     author={Stapleton, Joshua and Perminov, Andrew},
-    journal={arXiv preprint arXiv:TODO},
-    url={https://arxiv.org/abs/TODO},
+    journal={arXiv preprint arXiv:2609.32388},
+    url={https://arxiv.org/abs/2609.32388},
     year={2026}
 }
 ```
